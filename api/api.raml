@@ -1,0 +1,61 @@
+#%RAML 1.0
+title: Exemplo de API
+version: v1
+baseUri: http://api.example.com/{version}
+
+/types:
+  /users:
+    get:
+      description: Retorna todos os usuários
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                [
+                  {"id": 1, "name": "João"},
+                  {"id": 2, "name": "Maria"}
+                ]
+    post:
+      description: Cria um novo usuário
+      body:
+        application/json:
+          example: |
+            {"name": "Novo Usuário"}
+      responses:
+        201:
+          body:
+            application/json:
+              example: |
+                {"id": 3, "name": "Novo Usuário"}
+
+  /users/{userId}:
+    uriParameters:
+      userId:
+        description: ID do usuário
+        type: integer
+        example: 1
+    get:
+      description: Retorna um usuário pelo ID
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"id": 1, "name": "João"}
+    put:
+      description: Atualiza um usuário pelo ID
+      body:
+        application/json:
+          example: |
+            {"name": "Novo Nome"}
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"id": 1, "name": "Novo Nome"}
+    delete:
+      description: Deleta um usuário pelo ID
+      responses:
+        204:
